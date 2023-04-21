@@ -1,0 +1,17 @@
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki.FormCITEWiki2.resources
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.csproj.GenerateResource.cache
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.AssemblyInfoInputs.cache
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.AssemblyInfo.cs
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\bin\Debug\net6.0-windows\CITEWiki 2.exe
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\bin\Debug\net6.0-windows\CITEWiki 2.deps.json
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\bin\Debug\net6.0-windows\CITEWiki 2.runtimeconfig.json
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\bin\Debug\net6.0-windows\CITEWiki 2.dll
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\bin\Debug\net6.0-windows\CITEWiki 2.pdb
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.dll
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\refint\CITEWiki 2.dll
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.pdb
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\CITEWiki 2.genruntimeconfig.cache
+C:\Users\Administrator\Source\Repos\CITEWiki 2\CITEWiki 2\obj\Debug\net6.0-windows\ref\CITEWiki 2.dll
