@@ -36,7 +36,6 @@
             this.ButtonDelete = new System.Windows.Forms.Button();
             this.ButtonSearch = new System.Windows.Forms.Button();
             this.TextBoxName = new System.Windows.Forms.TextBox();
-            this.TextBoxCategory = new System.Windows.Forms.TextBox();
             this.TextBoxDefinition = new System.Windows.Forms.TextBox();
             this.TextBoxSearch = new System.Windows.Forms.TextBox();
             this.ButtonOpen = new System.Windows.Forms.Button();
@@ -44,11 +43,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.TextBoxStructure = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -125,13 +122,6 @@
             this.TextBoxName.Size = new System.Drawing.Size(155, 23);
             this.TextBoxName.TabIndex = 5;
             // 
-            // TextBoxCategory
-            // 
-            this.TextBoxCategory.Location = new System.Drawing.Point(477, 220);
-            this.TextBoxCategory.Name = "TextBoxCategory";
-            this.TextBoxCategory.Size = new System.Drawing.Size(155, 23);
-            this.TextBoxCategory.TabIndex = 6;
-            // 
             // TextBoxDefinition
             // 
             this.TextBoxDefinition.Location = new System.Drawing.Point(33, 238);
@@ -195,54 +185,38 @@
             this.label4.TabIndex = 15;
             this.label4.Text = "Category";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(458, 423);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 15);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Structure";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(33, 134);
+            this.groupBox1.Location = new System.Drawing.Point(33, 146);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(216, 83);
+            this.groupBox1.Size = new System.Drawing.Size(216, 59);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Structure";
             // 
-            // TextBoxStructure
-            // 
-            this.TextBoxStructure.Location = new System.Drawing.Point(447, 289);
-            this.TextBoxStructure.Name = "TextBoxStructure";
-            this.TextBoxStructure.Size = new System.Drawing.Size(155, 23);
-            this.TextBoxStructure.TabIndex = 7;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(18, 36);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(57, 19);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Linear";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(107, 36);
+            this.radioButton2.Location = new System.Drawing.Point(108, 26);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(85, 19);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Non-Linear";
             this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(19, 26);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(57, 19);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Linear";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
@@ -259,8 +233,6 @@
             this.ClientSize = new System.Drawing.Size(552, 450);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.TextBoxStructure);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -268,7 +240,6 @@
             this.Controls.Add(this.ButtonOpen);
             this.Controls.Add(this.TextBoxSearch);
             this.Controls.Add(this.TextBoxDefinition);
-            this.Controls.Add(this.TextBoxCategory);
             this.Controls.Add(this.TextBoxName);
             this.Controls.Add(this.ButtonSearch);
             this.Controls.Add(this.ButtonDelete);
@@ -298,7 +269,6 @@
         private Button ButtonDelete;
         private Button ButtonSearch;
         private TextBox TextBoxName;
-        private TextBox TextBoxCategory;
         private TextBox TextBoxDefinition;
         private TextBox TextBoxSearch;
         private Button ButtonOpen;
@@ -306,11 +276,9 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private Label label5;
         private GroupBox groupBox1;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
-        private TextBox TextBoxStructure;
         private ComboBox comboBox1;
     }
 }
