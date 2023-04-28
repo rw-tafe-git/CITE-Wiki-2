@@ -49,7 +49,7 @@ namespace CITEWiki
                     Wiki.Add(newItem);
                     ClearTextBoxes();
 
-                    DisplayWiki();
+                    DisplayTable();
                 }
                 catch
                 {
@@ -83,12 +83,12 @@ namespace CITEWiki
                 ButtonDelete.Enabled = false;
 
                 ClearTextBoxes();
-                DisplayWiki();
+                DisplayTable();
             }
         }
 
         //6.9 Create a single custom method that will sort and then display the Name and Category from the wiki information in the list.
-        private void DisplayWiki()
+        private void DisplayTable()
         {
             ListViewProperties.Items.Clear();
             Wiki.Sort();
@@ -118,7 +118,7 @@ namespace CITEWiki
                 ButtonDelete.Enabled = false;
 
                 ClearTextBoxes();
-                DisplayWiki();
+                DisplayTable();
             }
         }
 
@@ -184,7 +184,7 @@ namespace CITEWiki
             else if (RbNonLinear.Checked)
                 radioText = RbNonLinear.Text;
             //else if (RbNALinear.Checked)
-            //radioText = RbNALinear.Text;
+                //radioText = RbNALinear.Text;
             return radioText;
         }
 
@@ -214,52 +214,27 @@ namespace CITEWiki
         //6.10 Create a button method that will use the builtin binary search to find a Data Structure name. If the record is found the associated details will populate the appropriate input controls and highlight the name in the ListView. At the end of the search process the search input TextBox must be cleared.
         private void ButtonSearch_Click(object sender, MouseEventArgs e)
         {
-            /*BubbleSort();
-            bool found = false; // assume the item has not been found
-            int min = 0;
-            int max = ptr; // max is the current size
-            int foundIndex = 0;
-            string findThis = TextBoxSearch.Text;
-            while (min <= max)
-            {
-                int mid = ((min + max) / 2); // uses integer division
-                if (findThis.CompareTo(DataTable[mid, 0]) == 0)
-                {
-                    found = true;
-                    foundIndex = mid;
-                    break;
-                }
-                else if (findThis.CompareTo(DataTable[mid, 0]) < 0)
-                {
-                    max = mid - 1;
-                }
-                else
-                {
-                    min = mid + 1;
-                }
-            }
-            if (!found)
-            {
-                MessageBox.Show("Search failed: item not found");
-            }
-            else
-            {
-                MessageBox.Show("Success: the item was found");
+            Information item = new Information();
+            item.SetName(TextBoxSearch.Text);
+            int foundIndex = Wiki.BinarySearch(item);
 
-                //Set the input textboxes to the datatables values of the found index
-                TextBoxName.Text = DataTable[foundIndex, 0];
-                TextBoxDefinition.Text = DataTable[foundIndex, 3];
-
-                //Select the property in the list
+            if (foundIndex > -1)
+            {
                 ListViewProperties.SelectedItems.Clear();
                 ListViewProperties.Items[foundIndex].Selected = true;
                 ListViewProperties.Select();
 
-                selectedRow = foundIndex;
+                TextBoxSearch.Clear();
 
                 ButtonEdit.Enabled = true;
                 ButtonDelete.Enabled = true;
-            }*/
+
+                MessageBox.Show("Success: the item was found");
+            }
+            else
+            {
+                MessageBox.Show("Search failed: item not found");
+            }
         }
 
         #endregion
@@ -274,20 +249,70 @@ namespace CITEWiki
             saveFileDialog.Filter = "BIN|*.bin";
             saveFileDialog.Title = "Save your bin file";
             DialogResult sr = saveFileDialog.ShowDialog();
-            if (sr == DialogResult.Cancel)
+
+            if (sr == DialogResult.Cancel) 
             {
                 //saveFileDialog =
             }
-            else
+            else if (sr == DialogResult.OK) 
             {
-                //saveFileDialog =
+                using (var stream = File.Open(saveFileDialog.FileName, FileMode.Create))
+                {
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                    {
+                        for (int x = 0; x < Wiki.Count; x++)
+                        {
+                            writer.Write(Wiki[x].GetName());
+                            writer.Write(Wiki[x].GetCategory());
+                            writer.Write(Wiki[x].GetStructure());
+                            writer.Write(Wiki[x].GetDefinition());
+                        }
+                    }
+                }
+                MessageBox.Show("Table has been saved to bin file");
             }
         }
 
         //6.14 Create two buttons for the manual open and save option; this must use a dialog box to select a file or rename a saved file. All Wiki data is stored/retrieved using a binary reader/writer file format.
         private void ButtonOpen_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.Filter = "BIN Files|*.bin";
+            openFileDialog.Title = "Open a bin file";
+            DialogResult sr = openFileDialog.ShowDialog();
 
+            if (sr == DialogResult.Cancel) 
+            {
+                //saveFileDialog =
+            }
+            else if (sr == DialogResult.OK) 
+            {
+                if (File.Exists(openFileDialog.FileName))
+                {
+                    using (var stream = File.Open(openFileDialog.FileName, FileMode.Open))
+                    {
+                        using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
+                        {
+                            Wiki.Clear();
+
+                            while (stream.Position < stream.Length)
+                            {
+                                Information newItem = new Information();
+                                newItem.SetName(reader.ReadString());
+                                newItem.SetCategory(reader.ReadString());
+                                newItem.SetStructure(reader.ReadString());
+                                newItem.SetDefinition(reader.ReadString());
+                                Wiki.Add(newItem);
+                            }
+                        }
+                    }
+                    ClearTextBoxes();
+                    DisplayTable();
+
+                    MessageBox.Show("Table has been loaded from bin file");
+                }
+            }
         }
         #endregion
     }
