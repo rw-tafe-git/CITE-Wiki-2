@@ -1,1 +1,7 @@
-doin ya mum
+
+Array
+List
+Tree
+Graphs
+Abstract
+Hash

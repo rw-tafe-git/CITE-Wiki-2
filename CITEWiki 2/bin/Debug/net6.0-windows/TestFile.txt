@@ -1,0 +1,2 @@
+Method name ValidName
+Valid Name = true

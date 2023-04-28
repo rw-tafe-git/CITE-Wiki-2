@@ -44,9 +44,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.RbNonLinear = new System.Windows.Forms.RadioButton();
+            this.RbLinear = new System.Windows.Forms.RadioButton();
+            this.ComboBoxCategory = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +78,7 @@
             this.ListViewProperties.Location = new System.Drawing.Point(277, 58);
             this.ListViewProperties.Name = "ListViewProperties";
             this.ListViewProperties.Size = new System.Drawing.Size(245, 351);
-            this.ListViewProperties.TabIndex = 11;
+            this.ListViewProperties.TabIndex = 13;
             this.ListViewProperties.UseCompatibleStateImageBehavior = false;
             this.ListViewProperties.View = System.Windows.Forms.View.Details;
             this.ListViewProperties.Click += new System.EventHandler(this.ListViewProperties_Click);
@@ -128,7 +128,7 @@
             this.TextBoxDefinition.Multiline = true;
             this.TextBoxDefinition.Name = "TextBoxDefinition";
             this.TextBoxDefinition.Size = new System.Drawing.Size(216, 171);
-            this.TextBoxDefinition.TabIndex = 8;
+            this.TextBoxDefinition.TabIndex = 10;
             // 
             // TextBoxSearch
             // 
@@ -142,18 +142,17 @@
             this.ButtonOpen.Location = new System.Drawing.Point(33, 415);
             this.ButtonOpen.Name = "ButtonOpen";
             this.ButtonOpen.Size = new System.Drawing.Size(75, 23);
-            this.ButtonOpen.TabIndex = 9;
+            this.ButtonOpen.TabIndex = 11;
             this.ButtonOpen.Text = "Open";
             this.ButtonOpen.UseVisualStyleBackColor = true;
             this.ButtonOpen.Click += new System.EventHandler(this.ButtonOpen_Click);
             // 
             // ButtonSave
             // 
-            this.ButtonSave.Enabled = false;
             this.ButtonSave.Location = new System.Drawing.Point(174, 415);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(75, 23);
-            this.ButtonSave.TabIndex = 10;
+            this.ButtonSave.TabIndex = 12;
             this.ButtonSave.Text = "Save";
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
@@ -187,51 +186,51 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.RbNonLinear);
+            this.groupBox1.Controls.Add(this.RbLinear);
             this.groupBox1.Location = new System.Drawing.Point(33, 146);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(216, 59);
-            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Structure";
             // 
-            // radioButton2
+            // RbNonLinear
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(108, 26);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(85, 19);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Non-Linear";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.RbNonLinear.AutoSize = true;
+            this.RbNonLinear.Location = new System.Drawing.Point(108, 26);
+            this.RbNonLinear.Name = "RbNonLinear";
+            this.RbNonLinear.Size = new System.Drawing.Size(85, 19);
+            this.RbNonLinear.TabIndex = 9;
+            this.RbNonLinear.TabStop = true;
+            this.RbNonLinear.Text = "Non-Linear";
+            this.RbNonLinear.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // RbLinear
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(19, 26);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(57, 19);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Linear";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.RbLinear.AutoSize = true;
+            this.RbLinear.Location = new System.Drawing.Point(19, 26);
+            this.RbLinear.Name = "RbLinear";
+            this.RbLinear.Size = new System.Drawing.Size(57, 19);
+            this.RbLinear.TabIndex = 8;
+            this.RbLinear.TabStop = true;
+            this.RbLinear.Text = "Linear";
+            this.RbLinear.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // ComboBoxCategory
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(94, 105);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(155, 23);
-            this.comboBox1.TabIndex = 19;
+            this.ComboBoxCategory.FormattingEnabled = true;
+            this.ComboBoxCategory.Location = new System.Drawing.Point(94, 105);
+            this.ComboBoxCategory.Name = "ComboBoxCategory";
+            this.ComboBoxCategory.Size = new System.Drawing.Size(155, 23);
+            this.ComboBoxCategory.TabIndex = 6;
             // 
             // FormCITEWiki2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 450);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ComboBoxCategory);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -277,8 +276,8 @@
         private Label label3;
         private Label label4;
         private GroupBox groupBox1;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
-        private ComboBox comboBox1;
+        private RadioButton RbNonLinear;
+        private RadioButton RbLinear;
+        private ComboBox ComboBoxCategory;
     }
 }

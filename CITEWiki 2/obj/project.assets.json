@@ -8,19 +8,19 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+    "C:\\Users\\TEMP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Administrator\\Documents\\GitHub\\CITE-Wiki-2\\CITEWiki 2\\CITEWiki 2.csproj",
+      "projectUniqueName": "C:\\Users\\TEMP\\Source\\Repos\\CITE-Wiki-2\\CITEWiki 2\\CITEWiki 2.csproj",
       "projectName": "CITEWiki 2",
-      "projectPath": "C:\\Users\\Administrator\\Documents\\GitHub\\CITE-Wiki-2\\CITEWiki 2\\CITEWiki 2.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Administrator\\Documents\\GitHub\\CITE-Wiki-2\\CITEWiki 2\\obj\\",
+      "projectPath": "C:\\Users\\TEMP\\Source\\Repos\\CITE-Wiki-2\\CITEWiki 2\\CITEWiki 2.csproj",
+      "packagesPath": "C:\\Users\\TEMP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TEMP\\Source\\Repos\\CITE-Wiki-2\\CITEWiki 2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TEMP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
