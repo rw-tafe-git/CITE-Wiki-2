@@ -47,7 +47,10 @@
             this.RbNonLinear = new System.Windows.Forms.RadioButton();
             this.RbLinear = new System.Windows.Forms.RadioButton();
             this.ComboBoxCategory = new System.Windows.Forms.ComboBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.Msg = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonAdd
@@ -121,6 +124,7 @@
             this.TextBoxName.Name = "TextBoxName";
             this.TextBoxName.Size = new System.Drawing.Size(155, 23);
             this.TextBoxName.TabIndex = 5;
+            this.TextBoxName.DoubleClick += new System.EventHandler(this.TextBoxName_DoubleClick);
             // 
             // TextBoxDefinition
             // 
@@ -225,11 +229,28 @@
             this.ComboBoxCategory.Size = new System.Drawing.Size(155, 23);
             this.ComboBoxCategory.TabIndex = 6;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Msg});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 448);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(552, 22);
+            this.statusStrip1.TabIndex = 16;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // Msg
+            // 
+            this.Msg.Name = "Msg";
+            this.Msg.Size = new System.Drawing.Size(39, 17);
+            this.Msg.Text = "Ready";
+            // 
             // FormCITEWiki2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 450);
+            this.ClientSize = new System.Drawing.Size(552, 470);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ComboBoxCategory);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label4);
@@ -253,6 +274,8 @@
             this.Load += new System.EventHandler(this.FormCITEWiki2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,5 +302,7 @@
         private RadioButton RbNonLinear;
         private RadioButton RbLinear;
         private ComboBox ComboBoxCategory;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel Msg;
     }
 }

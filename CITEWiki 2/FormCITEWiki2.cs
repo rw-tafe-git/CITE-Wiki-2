@@ -12,16 +12,13 @@ using System.Windows.Forms;
 
 namespace CITEWiki
 {
-    //Student Riley, Date: 24/02/2023
+    //Student Riley, id 30002737, Date: 24/02/2023
     //Assessment Task 2
     public partial class FormCITEWiki2 : Form
     {
         public FormCITEWiki2()
         {
             InitializeComponent();
-            //ButtonSave.Enabled = false;
-            ButtonDelete.Enabled = false;
-            ButtonEdit.Enabled = false;
         }
 
         static Stream myTraceTestFile = File.Create("TestFile.txt");
@@ -35,12 +32,17 @@ namespace CITEWiki
         //6.3 Create a button method to ADD a new item to the list. Use a TextBox for the Name input, ComboBox for the Category, Radio group for the Structure and Multiline TextBox for the Definition.
         private void ButtonAdd_Click(object sender, MouseEventArgs e)
         {
-            bool Valid = ValidName(TextBoxName.Text);
+            Trace.Listeners.Add(myTraceListener);
 
-            if (Valid)
+            bool validName = ValidName(TextBoxName.Text);
+
+            try
             {
-                try
+                //Check if the name is not a duplicate and that all input fields are filled
+                if (validName && !string.IsNullOrEmpty(TextBoxName.Text) && !string.IsNullOrEmpty(ComboBoxCategory.Text) && !string.IsNullOrEmpty(GetRadioButton()) && !string.IsNullOrEmpty(TextBoxDefinition.Text))
                 {
+
+                    //Create a temporary information class
                     Information newItem = new Information();
                     newItem.SetName(TextBoxName.Text);
                     newItem.SetCategory(ComboBoxCategory.Text);
@@ -50,40 +52,67 @@ namespace CITEWiki
                     ClearTextBoxes();
 
                     DisplayTable();
+
+                    Trace.WriteLine("Add Method = List box record added");
+                    Msg.Text = "New Wiki information added";
                 }
-                catch
+                else
                 {
-                    //Msg.Text = "New Wiki information NOT added"
+                    Trace.WriteLine("Add Method = List box record not added");
+                    Msg.Text = "Fill in all input values to add record, no duplicate names";
                 }
+            }
+            catch
+            {
+                Trace.WriteLine("Add Method = List box record not added");
+                Msg.Text = "Fill in all input values to add record, no duplicate names";
             }
         }
 
-
+        //6.8 Create a button method that will save the edited record of the currently selected item in the ListView. All the changes in the input controls will be written back to the list. Display an updated version of the sorted list at the end of this process.
         private void ButtonEdit_Click(object sender, MouseEventArgs e)
         {
+            Trace.Listeners.Add(myTraceListener);
+
+            bool validName = ValidName(TextBoxName.Text);
+
+            //Create a temporary information class
             Information editItem = new Information();
             editItem.SetName(TextBoxName.Text);
             editItem.SetCategory(ComboBoxCategory.Text);
             editItem.SetStructure(GetRadioButton());
             editItem.SetDefinition(TextBoxDefinition.Text);
 
-            if (ListViewProperties.SelectedIndices[0] == -1)
+            try
             {
-                //Msg.Text = "Not working";
+                if (ListViewProperties.SelectedIndices[0] != -1 && validName && !string.IsNullOrEmpty(TextBoxName.Text) && !string.IsNullOrEmpty(ComboBoxCategory.Text) && !string.IsNullOrEmpty(GetRadioButton()) && !string.IsNullOrEmpty(TextBoxDefinition.Text))
+                {
+                    //Get selected index and then set it's properties from the temporary one
+                    int index = ListViewProperties.SelectedIndices[0];
+                    Wiki[index].SetName(editItem.GetName());
+                    Wiki[index].SetCategory(editItem.GetCategory());
+                    Wiki[index].SetStructure(editItem.GetStructure());
+                    Wiki[index].SetDefinition(editItem.GetDefinition());
+
+                    ButtonEdit.Enabled = false;
+                    ButtonDelete.Enabled = false;
+
+                    ClearTextBoxes();
+                    DisplayTable();
+
+                    Trace.WriteLine("Edit Method = record {0} edited", index.ToString());
+                    Msg.Text = "Wiki information edited";
+                }
+                else
+                {
+                    Trace.WriteLine("Edit Method = List box record not edited");
+                    Msg.Text = "Select a record from the List box for editing";
+                }
             }
-            else
+            catch
             {
-                int index = ListViewProperties.SelectedIndices[0];
-                Wiki[index].SetName(editItem.GetName());
-                Wiki[index].SetCategory(editItem.GetCategory());
-                Wiki[index].SetStructure(editItem.GetStructure());
-                Wiki[index].SetDefinition(editItem.GetDefinition());
-
-                ButtonEdit.Enabled = false;
-                ButtonDelete.Enabled = false;
-
-                ClearTextBoxes();
-                DisplayTable();
+                Trace.WriteLine("Edit Method = List box record not edited");
+                Msg.Text = "Select a record from the List box for editing";
             }
         }
 
@@ -92,6 +121,8 @@ namespace CITEWiki
         {
             ListViewProperties.Items.Clear();
             Wiki.Sort();
+
+            //loop though the wiki list and then add it's values to the listviewproperties
             foreach (var item in Wiki)
             {
                 ListViewItem lviName = new ListViewItem(item.GetName());
@@ -105,20 +136,34 @@ namespace CITEWiki
         {
             Trace.Listeners.Add(myTraceListener);
 
-            if (ListViewProperties.SelectedIndices[0] == -1)
+            try
             {
-                //Msg.Text = "Not working";
+                if (ListViewProperties.SelectedIndices[0] != -1)
+                {
+                    DialogResult result = MessageBox.Show("Do you want to delete this entry?", "Delete Entry", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        //Get selected index and then remove it from the wiki list
+                        int index = ListViewProperties.SelectedIndices[0];
+                        Wiki.RemoveAt(index);
+
+                        ButtonEdit.Enabled = false;
+                        ButtonDelete.Enabled = false;
+
+                        ClearTextBoxes();
+                        DisplayTable();
+
+                        Trace.WriteLine("Delete Method = record {0} deleted", index.ToString());
+                        Msg.Text = "Wiki information deleted";
+                    }
+
+                }
             }
-            else
+            catch
             {
-                int index = ListViewProperties.SelectedIndices[0];
-                Wiki.RemoveAt(index);
-
-                ButtonEdit.Enabled = false;
-                ButtonDelete.Enabled = false;
-
-                ClearTextBoxes();
-                DisplayTable();
+                Trace.WriteLine("Delete Method = List box record not deleted");
+                Msg.Text = "Select a record from the List box for deleting";
             }
         }
 
@@ -129,15 +174,22 @@ namespace CITEWiki
         private void ClearTextBoxes()
         {
             TextBoxName.Clear();
-            TextBoxDefinition.Clear();
             ComboBoxCategory.SelectedIndex = 0;
+            TextBoxDefinition.Clear();
             RbLinear.Checked = false;
             RbNonLinear.Checked = false;
+        }
+
+        //6.13 Create a double click event on the Name TextBox to clear the TextBboxes, ComboBox and Radio button.
+        private void TextBoxName_DoubleClick(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
         }
 
         //6.11 Create a ListView event so a user can select a Data Structure Name from the list of Names and the associated information will be displayed in the related text boxes combo box and radio button.
         private void ListViewProperties_Click(object sender, EventArgs e)
         {
+            //Get selected item index and it's properties for editing
             int currentItem = ListViewProperties.SelectedIndices[0];
             TextBoxName.Text = Wiki[currentItem].GetName();
             ComboBoxCategory.Text = Wiki[currentItem].GetCategory();
@@ -151,6 +203,7 @@ namespace CITEWiki
         //6.4 Create a custom method to populate the ComboBox when the Form Load method is called. The six categories must be read from a simple text file.
         private void FillComboBox()
         {
+            //Get string values from a file and add them to the combobox
             string[] dataString = File.ReadAllLines(@"categories.txt");
             for (int x = 0; x < dataString.Length; x++)
             {
@@ -183,8 +236,6 @@ namespace CITEWiki
                 radioText = RbLinear.Text;
             else if (RbNonLinear.Checked)
                 radioText = RbNonLinear.Text;
-            //else if (RbNALinear.Checked)
-                //radioText = RbNALinear.Text;
             return radioText;
         }
 
@@ -204,8 +255,22 @@ namespace CITEWiki
         //6.15 The Wiki application will save data when the form closes.
         private void WikiForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //SaveWikiData();
-            Trace.Close();
+            //Prevent the application form closing to display save prompt
+            e.Cancel = true;
+
+            DialogResult result = MessageBox.Show("Save changes before closing?", "Save Changes", MessageBoxButtons.YesNoCancel);
+
+            if (result == DialogResult.Yes)
+            {
+                SaveDialog(true);
+            }
+            else if (result == DialogResult.No)
+            {
+                Trace.Close();
+
+                //To prevent the save prompt from looping, we use ExitThread
+                Application.ExitThread();
+            }
         }
 
         #endregion
@@ -218,99 +283,140 @@ namespace CITEWiki
             item.SetName(TextBoxSearch.Text);
             int foundIndex = Wiki.BinarySearch(item);
 
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            Trace.WriteLine("Search index " + foundIndex);
+
             if (foundIndex > -1)
             {
                 ListViewProperties.SelectedItems.Clear();
                 ListViewProperties.Items[foundIndex].Selected = true;
-                ListViewProperties.Select();
-
-                TextBoxSearch.Clear();
+                ListViewProperties.Focus();
+                TextBoxName.Text = Wiki[foundIndex].GetName();
+                ComboBoxCategory.Text = Wiki[foundIndex].GetCategory();
+                SetRadioButton(foundIndex);
+                TextBoxDefinition.Text = Wiki[foundIndex].GetDefinition();
 
                 ButtonEdit.Enabled = true;
                 ButtonDelete.Enabled = true;
 
-                MessageBox.Show("Success: the item was found");
+                Trace.WriteLine("Index found " + foundIndex);
+                Msg.Text = "Search success: Wiki item found";
             }
             else
             {
-                MessageBox.Show("Search failed: item not found");
+                Trace.WriteLine("Index not found " + foundIndex);
+                Msg.Text = "Search failed: Wiki item not found";
+                ClearTextBoxes();
             }
+            TextBoxSearch.Clear();
+            TextBoxSearch.Focus();
         }
 
         #endregion
 
         #region File IO
-        //6.8 Create a button method that will save the edited record of the currently selected item in the ListView. All the changes in the input controls will be written back to the list. Display an updated version of the sorted list at the end of this process.
+
+        //6.14 Create two buttons for the manual open and save option; this must use a dialog box to select a file or rename a saved file. All Wiki data is stored/retrieved using a binary reader/writer file format.
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            string fileName = "Wiki.bin";
+            SaveDialog();
+        }
+
+        private void ButtonOpen_Click(object sender, EventArgs e)
+        {
+            OpenDialog();
+        }
+
+        private void SaveDialog(bool exiting = false)
+        {
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            Trace.Write("Opened save dialog");
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = Application.StartupPath;
             saveFileDialog.Filter = "BIN|*.bin";
             saveFileDialog.Title = "Save your bin file";
             DialogResult sr = saveFileDialog.ShowDialog();
 
-            if (sr == DialogResult.Cancel) 
+            if (sr == DialogResult.OK)
             {
-                //saveFileDialog =
-            }
-            else if (sr == DialogResult.OK) 
-            {
-                using (var stream = File.Open(saveFileDialog.FileName, FileMode.Create))
+                try
                 {
-                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                    using (var stream = File.Open(saveFileDialog.FileName, FileMode.Create))
                     {
-                        for (int x = 0; x < Wiki.Count; x++)
+                        using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
                         {
-                            writer.Write(Wiki[x].GetName());
-                            writer.Write(Wiki[x].GetCategory());
-                            writer.Write(Wiki[x].GetStructure());
-                            writer.Write(Wiki[x].GetDefinition());
+                            foreach (var item in Wiki)
+                            {
+                                writer.Write(item.GetName());
+                                writer.Write(item.GetCategory());
+                                writer.Write(item.GetStructure());
+                                writer.Write(item.GetDefinition());
+                            }
                         }
                     }
+                    Trace.Write("Wiki information = saved");
+                    Msg.Text = "Saved Wiki information to bin file";
                 }
-                MessageBox.Show("Table has been saved to bin file");
+                catch (IOException)
+                {
+                    Trace.Write("Wiki information = not saved");
+                    Msg.Text = "Could not save Wiki information";
+                }
+
+                //If exiting then exit the application
+                if (exiting)
+                {
+                    Trace.Close();
+                    Application.ExitThread();
+                }
             }
         }
-
-        //6.14 Create two buttons for the manual open and save option; this must use a dialog box to select a file or rename a saved file. All Wiki data is stored/retrieved using a binary reader/writer file format.
-        private void ButtonOpen_Click(object sender, EventArgs e)
+        private void OpenDialog()
         {
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Application.StartupPath;
             openFileDialog.Filter = "BIN Files|*.bin";
             openFileDialog.Title = "Open a bin file";
             DialogResult sr = openFileDialog.ShowDialog();
 
-            if (sr == DialogResult.Cancel) 
+            if (sr == DialogResult.OK)
             {
-                //saveFileDialog =
-            }
-            else if (sr == DialogResult.OK) 
-            {
+                Wiki.Clear();
+
                 if (File.Exists(openFileDialog.FileName))
                 {
-                    using (var stream = File.Open(openFileDialog.FileName, FileMode.Open))
+                    try
                     {
-                        using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
+                        using (var stream = File.Open(openFileDialog.FileName, FileMode.Open))
                         {
-                            Wiki.Clear();
-
-                            while (stream.Position < stream.Length)
+                            using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
                             {
-                                Information newItem = new Information();
-                                newItem.SetName(reader.ReadString());
-                                newItem.SetCategory(reader.ReadString());
-                                newItem.SetStructure(reader.ReadString());
-                                newItem.SetDefinition(reader.ReadString());
-                                Wiki.Add(newItem);
+                                while (stream.Position < stream.Length)
+                                {
+                                    Information newItem = new Information();
+                                    newItem.SetName(reader.ReadString());
+                                    newItem.SetCategory(reader.ReadString());
+                                    newItem.SetStructure(reader.ReadString());
+                                    newItem.SetDefinition(reader.ReadString());
+                                    Wiki.Add(newItem);
+                                }
                             }
                         }
-                    }
-                    ClearTextBoxes();
-                    DisplayTable();
 
-                    MessageBox.Show("Table has been loaded from bin file");
+                        ClearTextBoxes();
+                        DisplayTable();
+
+                        Trace.Write("Wiki information = opened");
+                        Msg.Text = "Loaded Wiki information from bin file";
+                    }
+                    catch (IOException)
+                    {
+                        Trace.Write("Wiki information = not opened");
+                        Msg.Text = "Could not open Wiki information";
+                    }
                 }
             }
         }
